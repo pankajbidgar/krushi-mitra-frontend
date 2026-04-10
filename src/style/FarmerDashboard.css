@@ -1,0 +1,164 @@
+/* frontend/src/style/FarmerDashboard.css */
+.farmer-dashboard {
+  padding: 2rem;
+  background: #f8fafc;
+  min-height: calc(100vh - 70px);
+}
+.dashboard-header h1 {
+  color: #2e7d32;
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+}
+.dashboard-header p {
+  color: #555;
+}
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.farmer-stat-card {
+  background: white;
+  border-radius: 20px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+.stat-icon {
+  font-size: 2.2rem;
+}
+.stat-info h3 {
+  font-size: 1.5rem;
+  margin: 0;
+  color: #1e1e2f;
+}
+.stat-info p {
+  margin: 0;
+  color: #666;
+  font-size: 0.8rem;
+}
+.farmer-charts-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.chart-card {
+  background: white;
+  border-radius: 24px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.chart-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #2e7d32;
+}
+.recent-orders {
+  background: white;
+  border-radius: 24px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+}
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.orders-table th, .orders-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 30px;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+.status-badge.pending { background: #fff3e0; color: #e65100; }
+.status-badge.confirmed { background: #e8f5e9; color: #2e7d32; }
+.status-badge.shipped { background: #e3f2fd; color: #1565c0; }
+.status-badge.delivered { background: #c8e6c9; color: #1b5e20; }
+.status-badge.cancelled { background: #ffebee; color: #c62828; }
+.view-all-btn {
+  background: none;
+  border: none;
+  color: #2e7d32;
+  cursor: pointer;
+  margin-top: 12px;
+  font-weight: 600;
+}
+.quick-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+.action-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 40px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.action-btn.add { background: #2e7d32; color: white; }
+.action-btn.list { background: #2196f3; color: white; }
+.action-btn.orders { background: #ff9800; color: white; }
+.loading-state { text-align: center; padding: 3rem; }
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .farmer-dashboard {
+    padding: 1rem;
+  }
+  .dashboard-header h1 {
+    font-size: 1.4rem;
+  }
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+  .stat-card {
+    padding: 0.8rem;
+  }
+  .stat-icon {
+    font-size: 1.8rem;
+  }
+  .stat-info h3 {
+    font-size: 1.2rem;
+  }
+  .farmer-charts-row {
+    grid-template-columns: 1fr;
+  }
+  .chart-card {
+    padding: 0.8rem;
+  }
+  .chart-card canvas {
+    max-height: 250px !important;
+  }
+  .orders-table th, .orders-table td {
+    padding: 6px 8px;
+    font-size: 0.75rem;
+  }
+  .quick-actions {
+    justify-content: center;
+  }
+  .action-btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+}
+@media (max-width: 480px) {
+  .stats-row {
+    grid-template-columns: 1fr;
+  }
+  .stat-card {
+    justify-content: center;
+  }
+}

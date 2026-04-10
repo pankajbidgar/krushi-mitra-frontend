@@ -1,0 +1,232 @@
+.buyer-products {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+.filters input, .filters select {
+  padding: 0.6rem 1rem;
+  border-radius: 40px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.product-card {
+  background: white;
+  border-radius: 20px;
+  padding: 1.2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s;
+}
+.product-card:hover {
+  transform: translateY(-3px);
+}
+.price {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #2e7d32;
+  margin: 0.5rem 0;
+}
+.card-buttons {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+.details-btn, .cart-btn {
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.details-btn {
+  background: #2196f3;
+  color: white;
+}
+.cart-btn {
+  background: #ff9800;
+  color: white;
+}
+/* Modal styles (reuse from earlier) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 24px;
+  max-width: 450px;
+  width: 90%;
+}
+.close-btn {
+  background: #9e9e9e;
+  color: white;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 30px;
+  margin-left: 1rem;
+}
+.loading {
+  text-align: center;
+  padding: 3rem;
+}
+@media (max-width: 640px) {
+  .buyer-products { padding: 1rem; }
+}
+
+
+.product-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-bottom: 12px;
+}
+
+.modal-images {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin: 12px 0;
+  padding: 8px 0;
+}
+.modal-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 12px;
+  flex-shrink: 0;
+  border: 1px solid #ddd;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  justify-content: flex-end;
+}
+
+/* रेटिंग स्टाईल */
+.product-rating {
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.star-rating {
+  display: inline-block;
+}
+.star {
+  font-size: 1rem;
+  color: #ddd;
+}
+.star.filled {
+  color: #ffc107;
+}
+.rating-count {
+  font-size: 0.8rem;
+  color: #666;
+}
+.no-rating {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+/* रिव्ह्यू सेक्शन */
+.product-reviews {
+  margin: 15px 0;
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 16px;
+}
+.review-card {
+  background: white;
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.add-review {
+  margin-top: 15px;
+  border-top: 1px solid #eee;
+  padding-top: 12px;
+}
+.rating-select {
+  margin: 8px 0;
+}
+.add-review textarea {
+  width: 100%;
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  margin: 8px 0;
+}
+.add-review button {
+  background: #2e7d32;
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.msg-btn {
+  background: #25d366;
+  color: white;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin-left: 8px;
+  transition: background 0.2s;
+}
+.msg-btn:hover {
+  background: #128c7e;
+}
+.card-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+
+.qr-btn {
+  background: #673ab7;
+  color: white;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin-left: 8px;
+  transition: background 0.2s;
+}
+.qr-btn:hover {
+  background: #512da8;
+}
+.card-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}

@@ -1,0 +1,268 @@
+.my-orders-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+.my-orders-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.my-orders-header h2 {
+  font-size: 2rem;
+  color: #2e7d32;
+}
+.loading-spinner {
+  text-align: center;
+  padding: 3rem;
+}
+.no-orders {
+  text-align: center;
+  padding: 3rem;
+  background: #f9f9f9;
+  border-radius: 24px;
+}
+.shop-now-btn {
+  display: inline-block;
+  background: #2e7d32;
+  color: white;
+  padding: 0.6rem 1.5rem;
+  border-radius: 40px;
+  text-decoration: none;
+}
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.order-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+.order-header {
+  background: #f5f5f5;
+  padding: 0.8rem 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.order-status {
+  padding: 0.2rem 0.8rem;
+  border-radius: 30px;
+  font-size: 0.85rem;
+}
+.order-status.pending { background: #fff3e0; color: #e65100; }
+.order-status.confirmed { background: #e8f5e9; color: #2e7d32; }
+.order-status.shipped { background: #e3f2fd; color: #1565c0; }
+.order-status.delivered { background: #c8e6c9; color: #1b5e20; }
+.order-status.cancelled { background: #ffebee; color: #c62828; }
+.order-body {
+  padding: 1.2rem;
+}
+.order-date {
+  color: #777;
+  font-size: 0.85rem;
+  margin-bottom: 0.8rem;
+}
+.order-total {
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+}
+.order-items ul {
+  margin: 0.5rem 0 0 1rem;
+}
+.delivery-date {
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed #ddd;
+  color: #2e7d32;
+  font-weight: 500;
+}
+@media (max-width: 640px) {
+  .my-orders-container {
+    margin: 1rem;
+  }
+  .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+
+
+/* गॅलरी स्टाईल */
+.product-images-gallery {
+  display: flex;
+  gap: 5px;
+  overflow-x: auto;
+  margin-bottom: 10px;
+}
+.product-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+/* एडिट मोडलमधील इमेज प्रीव्ह्यू */
+.existing-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+.image-preview-wrapper {
+  position: relative;
+  display: inline-block;
+}
+.edit-preview-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+.remove-img-btn {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #d32f2f;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+/* ... existing styles ... */
+
+.payment-details {
+  background: #f8f9fa;
+  padding: 10px 15px;
+  border-radius: 12px;
+  margin: 12px 0;
+  font-size: 0.9rem;
+}
+.payment-details p {
+  margin: 5px 0;
+}
+.payment-details strong {
+  color: #2e7d32;
+}
+
+.delivery-date.pending {
+  color: #ff9800;
+  background: #fff3e0;
+  padding: 5px 10px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+
+/* Filter buttons */
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+  justify-content: center;
+}
+.filter-buttons button {
+  background: #f0f0f0;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+.filter-buttons button.active {
+  background: #2e7d32;
+  color: white;
+}
+.filter-buttons button:hover {
+  background: #c8e6c9;
+}
+
+
+
+.order-product-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.rate-product-btn {
+  background: #ff9800;
+  color: white;
+  border: none;
+  padding: 4px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+.already-reviewed {
+  background: #c8e6c9;
+  color: #2e7d32;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+}
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 16px;
+}
+.submit-review-btn {
+  background: #2e7d32;
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+.cancel-btn {
+  background: #9e9e9e;
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+.rating-select {
+  text-align: center;
+  margin: 10px 0;
+}
+
+
+
+.msg-farmer-btn {
+  margin-top: 12px;
+  background: #25d366;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s;
+}
+.msg-farmer-btn:hover {
+  background: #128c7e;
+}
