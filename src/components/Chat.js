@@ -303,7 +303,7 @@
 
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import socket from '../socket';
 import { useAuth } from '../context/AuthContext';
@@ -325,7 +325,6 @@ function Chat() {
   const messagesEndRef = useRef(null);
   const token = localStorage.getItem('token');
 
-  // Fetch all users
   const fetchUsers = useCallback(async () => {
     try {
       const res = await axios.get('http://localhost:8000/users/all', {
@@ -337,7 +336,6 @@ function Chat() {
     }
   }, [token]);
 
-  // Fetch conversations
   const fetchConversations = useCallback(async () => {
     try {
       const res = await axios.get('http://localhost:8000/chat/conversations', {
@@ -357,7 +355,6 @@ function Chat() {
     }
   }, [token]);
 
-  // Fetch messages with selected user
   const fetchMessages = useCallback(async (userId) => {
     setLoadingMsgs(true);
     try {
@@ -376,7 +373,6 @@ function Chat() {
     }
   }, [token]);
 
-  // Send message
   const sendMessage = async () => {
     if (!newMessage.trim() || !selectedUser) return;
     const now = Date.now();
@@ -441,7 +437,6 @@ function Chat() {
     }
   };
 
-  // Socket listener
   useEffect(() => {
     const handleNewChatMessage = (data) => {
       const now = Date.now();
@@ -479,36 +474,30 @@ function Chat() {
     return () => socket.off('new_chat_message', handleNewChatMessage);
   }, [user.id, selectedUser]);
 
-  // Auto-select user from URL param
   useEffect(() => {
     if (userIdParam && users.length > 0) {
       const target = users.find(u => u.id === parseInt(userIdParam));
       if (target) {
         setSelectedUser(target);
         fetchMessages(target.id);
-        // Navigate without param to prevent re-selection
         window.history.replaceState(null, '', '/chat');
       }
     }
   }, [userIdParam, users, fetchMessages]);
 
-  // Initial load
   useEffect(() => {
     fetchUsers();
     fetchConversations();
   }, [fetchUsers, fetchConversations]);
 
-  // Load messages when selected user changes
   useEffect(() => {
     if (selectedUser) fetchMessages(selectedUser.id);
   }, [selectedUser, fetchMessages]);
 
-  // Auto-scroll to bottom
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // Build sidebar with sorting
   const filteredUsers = users.filter(u => {
     const matchSearch = u.full_name?.toLowerCase().includes(search.toLowerCase());
     const matchRole = filterRole === 'all' || u.role === filterRole;
@@ -524,7 +513,7 @@ function Chat() {
     }))
     .sort((a, b) => b.last_message_time - a.last_message_time);
 
-  // Inline styles (keep your existing styles – they are fine)
+  // Inline styles (same as before – keep them as is)
   const containerStyle = { display: 'flex', height: '100vh', fontFamily: 'Arial, sans-serif' };
   const sidebarStyle = { width: '320px', borderRight: '1px solid #ddd', display: 'flex', flexDirection: 'column', backgroundColor: '#fff' };
   const sidebarHeaderStyle = { padding: '16px', borderBottom: '1px solid #ddd' };
