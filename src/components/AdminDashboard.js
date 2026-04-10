@@ -448,7 +448,7 @@ function AdminDashboard() {
                     </select>
                     </td>
                   <td><button onClick={() => deleteUser(u.id)} className="delete-btn">हटवा</button></td>
-                 </tr>
+                </tr>
               ))}
             </tbody>
           </table>
@@ -470,7 +470,7 @@ function AdminDashboard() {
                   <td>{p.farmer_name}</td>
                   <td>{p.is_available ? 'होय' : 'नाही'}</td>
                   <td><button onClick={() => deleteProduct(p.id)} className="delete-btn">हटवा</button></td>
-                 </tr>
+                </tr>
               ))}
             </tbody>
           </table>
@@ -504,7 +504,7 @@ function AdminDashboard() {
                       <option value="cancelled">रद्द</option>
                     </select>
                     </td>
-                 </tr>
+                </tr>
               ))}
             </tbody>
           </table>
