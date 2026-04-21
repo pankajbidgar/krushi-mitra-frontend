@@ -1,0 +1,278 @@
+/* FarmManagement.css */
+.farm-management-container {
+  max-width: 1300px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+/* Header */
+.farm-header {
+  margin-bottom: 2rem;
+}
+.farm-header h2 {
+  color: #2e7d32;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Date Filter */
+.date-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 20px;
+  margin-bottom: 2rem;
+}
+.date-filter input {
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  border: 1px solid #ccc;
+}
+.date-filter button {
+  background: #2e7d32;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+/* Profit/Loss Cards */
+.pl-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.pl-card {
+  background: white;
+  padding: 1.2rem;
+  border-radius: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  text-align: center;
+}
+.pl-card.revenue { background: #e3f2fd; color: #1565c0; }
+.pl-card.expense { background: #ffebee; color: #c62828; }
+.pl-card.profit.positive { background: #e8f5e9; color: #2e7d32; }
+.pl-card.profit.negative { background: #ffebee; color: #c62828; }
+.pl-card h3 { font-size: 1.8rem; margin: 0.5rem 0; }
+
+/* Breakdowns Grid */
+.breakdowns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.breakdown-card {
+  background: #fafafa;
+  border-radius: 20px;
+  padding: 1rem;
+}
+.breakdown-card h4 {
+  margin-bottom: 0.8rem;
+  color: #2e7d32;
+}
+.breakdown-card ul {
+  list-style: none;
+  padding: 0;
+}
+.breakdown-card li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Add Expense Form */
+.add-expense-card {
+  background: white;
+  border-radius: 28px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+.add-expense-card h3 {
+  margin-bottom: 1rem;
+  color: #2e7d32;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+.form-group label {
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  font-size: 0.85rem;
+}
+.form-group input, .form-group select, .form-group textarea {
+  padding: 0.6rem;
+  border-radius: 30px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+}
+.image-upload-buttons {
+  display: flex;
+  gap: 0.8rem;
+  margin: 0.5rem 0;
+}
+.image-upload-buttons button {
+  flex: 1;
+  padding: 0.4rem;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+.gallery-btn { background: #2e7d32; color: white; }
+.camera-btn { background: #ff9800; color: white; }
+.receipt-preview {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-top: 0.5rem;
+}
+.checkbox-group {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+.submit-btn {
+  background: #2e7d32;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 40px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+/* Expenses Table */
+.expenses-list {
+  background: white;
+  border-radius: 28px;
+  padding: 1rem;
+  overflow-x: auto;
+}
+.expenses-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.expenses-table th, .expenses-table td {
+  padding: 10px 8px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+.expenses-table th {
+  background: #f5f5f5;
+  position: sticky;
+  top: 0;
+}
+.delete-expense-btn {
+  background: #d32f2f;
+  color: white;
+  border: none;
+  padding: 4px 12px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+.paid-badge { color: #2e7d32; font-weight: bold; }
+.pending-badge { color: #c62828; font-weight: bold; }
+
+/* Responsive */
+@media (max-width: 640px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .expenses-table {
+    font-size: 0.7rem;
+  }
+}
+
+
+/* Add Expense Main Button */
+.farm-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+.add-expense-main-btn {
+  background: #2e7d32;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 40px;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.2s;
+}
+.add-expense-main-btn:hover {
+  background: #1b5e20;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+.modal-content {
+  background: white;
+  border-radius: 28px;
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 1.5rem;
+  position: relative;
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.modal-header h3 {
+  margin: 0;
+  color: #2e7d32;
+}
+.close-modal {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+}
+.close-modal:hover {
+  color: #d32f2f;
+}
+
+/* Remaining styles (already present) */
+/* ... your existing CSS ... */

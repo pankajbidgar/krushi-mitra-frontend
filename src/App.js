@@ -113,10 +113,29 @@ import MarketPrices from './pages/MarketPrices';
 import WeatherAdvice from './pages/MeatherAdvice';
 import Chatbot from './pages/Chatbot';
 import DiseaseDetection from './pages/DiseaseDetection';
+import FarmManagment from './components/Farmer/FarmManagement';
+import SoilMoisture from './components/Farmer/SoilMoisture';
+import TaskManager from './components/Farmer/TaskManager';
+import ProfitReport from './components/Farmer/ProfitReport';
+import IrrigationScheduler from './components/Farmer/IrrigationScheduler';
+import YieldPrediction from './components/Farmer/YieldPrediction';
+
+
 
 function SocketListeners() {
   const { user } = useAuth();
   const { addNotification } = useNotifications();
+
+  socket.on('irrigation_due',(data) => {
+    toast.info(data.message);
+    addNotification(
+      '💧 सिंचन रिमाइंडर',
+      data.message,
+      'irrigation',
+      '/farmer/irrigation'
+
+    );
+  });
 
   useEffect(() => {
     if (!user) return;
@@ -210,6 +229,41 @@ function AppContent() {
         <Route path='/disease-detection' element={
           <PrivateRoute>
             <DiseaseDetection/>
+          </PrivateRoute>
+        }/>
+        <Route path='/farmer/farm-management' element={
+          <PrivateRoute>
+            <FarmManagment allowedRoles={['farmer']}/>
+          </PrivateRoute>
+        }/>
+
+        <Route path='/soil-moisture' element={
+          <PrivateRoute>
+            <SoilMoisture/>
+          </PrivateRoute>
+        }/>
+
+        <Route path='/farmer/tasks' element={
+          <PrivateRoute allowedRoles={['farmer']}>
+            <TaskManager/>
+          </PrivateRoute>
+        }/>
+
+        <Route path='/farmer/profit-report' element={
+          <PrivateRoute allowedRoles={['farmer']}>
+            <ProfitReport/>
+          </PrivateRoute>
+        }/>
+
+        <Route path='/farmer/irrigation' element={
+          <PrivateRoute allowedRoles={['farmer']}>
+            <IrrigationScheduler/>
+          </PrivateRoute>
+        }/>
+
+        <Route path='/farmer/yield-prediction' element={
+          <PrivateRoute allowedRoles={['farmer']}>
+            <YieldPrediction/>
           </PrivateRoute>
         }/>
 

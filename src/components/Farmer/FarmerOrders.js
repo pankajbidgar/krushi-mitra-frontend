@@ -191,6 +191,30 @@ function FarmerOrders() {
     }
   };
 
+
+  // downloadInvoice फंक्शन जोडा
+const downloadInvoice = async (orderId) => {
+  try {
+    const response = await axios.get(`http://localhost:8000/orders/${orderId}/invoice`, {
+      responseType: 'blob',
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    });
+    const url = window.URL.createObjectURL(response.data);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `invoice_${orderId}.pdf`);
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.URL.revokeObjectURL(url);
+  } catch (err) {
+    toast.error('Failed to download invoice');
+  }
+};
+
+// बटण जोडा (order कार्डच्या शेवटी)
+
+
   const updateDeliveryDate = async (orderId, date) => {
     if (!date) return;
     try {
@@ -280,6 +304,7 @@ function FarmerOrders() {
                     <option value="cancelled">रद्द</option>
                   </select>
                 </div>
+                <button onClick={() => downloadInvoice(order.id)} className="invoice-btn">📄 इनव्हॉइस डाउनलोड करा</button>
                 
                 {/* मेसेज बटण – शेतकरी ते खरेदीदार */}
                 {/* <button 

@@ -609,19 +609,19 @@ function MyProducts() {
 
               <div className="product-actions">
                 <button
-                  className="edit-btn"
+                  className="farmer-edit-btn"
                   onClick={() => openEditModal(p)}
                 >
                   ✏️ संपादित करा
                 </button>
                 <button
-                  className="delete-btn"
+                  className="farmer-delete-btn"
                   onClick={() => handleDelete(p.id)}
                 >
                   🗑️ हटवा
                 </button>
                 <button
-                  className="status-btn"
+                  className="farmer-status-btn"
                   onClick={() => handleToggleStatus(p.id)}
                 >
                   {p.is_available ? "🔴 अनुपलब्ध करा" : "🟢 उपलब्ध करा"}

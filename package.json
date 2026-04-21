@@ -9,9 +9,13 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.14.0",
     "chart.js": "^4.5.1",
+    "emoji-picker-react": "^4.18.0",
     "framer-motion": "^12.38.0",
     "io": "^1.5.8",
+    "jspdf": "^4.2.1",
+    "jspdf-autotable": "^5.0.7",
     "lucide-react": "^1.7.0",
+    "mic-recorder-to-mp3": "^2.2.2",
     "razorpay": "^2.9.6",
     "react": "^19.2.4",
     "react-chartjs-2": "^5.3.1",
@@ -21,15 +25,15 @@
     "react-router-dom": "^7.14.0",
     "react-scripts": "^5.0.1",
     "socket.io-client": "^4.8.3",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5"
   },
-
   "scripts": {
-  "start": "react-scripts start",
-  "build": "DISABLE_ESLINT_PLUGIN=true react-scripts build",
-  "test": "react-scripts test",
-  "eject": "react-scripts eject"
-},
+    "start": "react-scripts start",
+    "build": "DISABLE_ESLINT_PLUGIN=true react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -49,8 +53,6 @@
     ]
   },
   "engines": {
-  "node": "24.x"
+    "node": "24.x"
+  }
 }
-}
-
-

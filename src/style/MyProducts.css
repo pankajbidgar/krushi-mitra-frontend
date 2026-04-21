@@ -57,9 +57,9 @@
   margin-top: 1rem;
 }
 
-.edit-btn,
-.delete-btn,
-.status-btn {
+.farmer-edit-btn,
+.farmer-delete-btn,
+.farmer-status-btn {
   border: none;
   padding: 0.4rem 0.8rem;
   border-radius: 30px;
@@ -68,25 +68,25 @@
   transition: 0.2s;
 }
 
-.edit-btn {
+.farmer-edit-btn {
   background: #ffa000;
   color: white;
 }
-.edit-btn:hover {
+.farmer-edit-btn:hover {
   background: #ff8f00;
 }
-.delete-btn {
+.farmer-delete-btn {
   background: #d32f2f;
   color: white;
 }
-.delete-btn:hover {
+.farmer-delete-btn:hover {
   background: #b71c1c;
 }
-.status-btn {
+.farmer-status-btn {
   background: #1976d2;
   color: white;
 }
-.status-btn:hover {
+.farmer-status-btn:hover {
   background: #0d47a1;
 }
 

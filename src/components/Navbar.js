@@ -305,6 +305,9 @@ function Navbar() {
 
   // Krushi Mitra features (for all roles)
   const krushiMitraLinks = [
+    { to: '/farmer/tasks', label: '📋 फार्म जर्नल' },
+    { to: '/soil-moisture', label: '💧 माती ओलावा मॉनिटर' },
+    { to: '/farmer/farm-management', label: '🌾 शेत व्यवस्थापन' },
     { to: '/crop-recommendation', label: '🌾 पीक शिफारस' },
     { to: '/market-prices', label: '📊 मंडी भाव' },
     { to: '/weather-advice', label: '🌤️ हवामान सल्ला' },
@@ -314,9 +317,13 @@ function Navbar() {
 
   // Farmer marketplace links
   const farmerMarketLinks = [
+
     { to: '/farmer/add-products', label: '🌾 उत्पादन जोडा' },
     { to: '/farmer/my-products', label: '📦 माझी उत्पादने' },
     { to: '/farmer/orders', label: '📋 माझ्या ऑर्डर' },
+    { to: '/farmer/profit-report', label: '📊 नफा/तोटा अहवाल' },
+    { to: '/farmer/irrigation', label: '💧 सिंचन शेड्यूलर' },
+    { to: '/farmer/yield-prediction', label: '🌾 उत्पादन अंदाज' },
   ];
 
   // Buyer marketplace links
