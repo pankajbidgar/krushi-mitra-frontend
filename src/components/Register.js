@@ -105,6 +105,8 @@ function Register() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+
+  const API = process.env.REACT_APP_API_URL;
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (form.password !== form.confirmPassword) {
@@ -128,12 +130,12 @@ function Register() {
           location: form.location,
           email: form.email || null
         };
-        await axios.post('http://localhost:8000/mobile/register', payload);
+        await axios.post('${API}/mobile/register', payload);
         toast.success('नोंदणी यशस्वी! आता लॉगिन करा.');
         navigate('/login');
       } else {
         // Normal email registration
-        await axios.post('http://localhost:8000/register', {
+        await axios.post('${API}/register', {
           full_name: form.full_name,
           email: form.email,
           password: form.password,
