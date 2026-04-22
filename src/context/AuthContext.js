@@ -1,3 +1,6 @@
+
+
+
 // import React, { createContext, useState, useEffect, useContext } from 'react';
 // import axios from 'axios';
 // import { useNavigate } from 'react-router-dom';
@@ -54,9 +57,11 @@
 //     }
 //   }, [user]);
 
+//   const API = process.env.REACT_APP_API_URL
+
 //   const login = async (email, password) => {
 //     try {
-//       const res = await axios.post('http://localhost:8000/login', { email, password });
+//       const res = await axios.post('${API}/login', { email, password });
 //       localStorage.setItem('token', res.data.access_token);
 //       const userRes = await axios.get('http://localhost:8000/me', {
 //         headers: { Authorization: `Bearer ${res.data.access_token}` }
@@ -76,11 +81,14 @@
 //   };
 
 //   return (
-//     <AuthContext.Provider value={{ user, loading, login, logout }}>
+//     <AuthContext.Provider value={{ user, setUser, loading, login, logout }}>
 //       {children}
 //     </AuthContext.Provider>
 //   );
 // };
+
+
+
 
 
 import React, { createContext, useState, useEffect, useContext } from 'react';
@@ -98,10 +106,14 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  const API = process.env.REACT_APP_API_URL;
+
+  // 🔹 Check logged-in user on load
   useEffect(() => {
     const token = localStorage.getItem('token');
+
     if (token) {
-      axios.get('http://localhost:8000/me', {
+      axios.get(`${API}/me`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(res => {
@@ -115,9 +127,9 @@ export const AuthProvider = ({ children }) => {
     } else {
       setLoading(false);
     }
-  }, []);
+  }, [API]);
 
-  // Socket listeners – फक्त user उपलब्ध असेल तेव्हा
+  // 🔹 Socket listeners
   useEffect(() => {
     if (user && user.id) {
       socket.emit('register_user', { user_id: user.id });
@@ -125,6 +137,7 @@ export const AuthProvider = ({ children }) => {
       const handleNewOrder = (data) => {
         toast.success(data.message);
       };
+
       const handleStatusUpdate = (data) => {
         toast.info(data.message);
       };
@@ -139,23 +152,30 @@ export const AuthProvider = ({ children }) => {
     }
   }, [user]);
 
-  const API = process.env.REACT_APP_API_URL
-
+  // 🔹 Login
   const login = async (email, password) => {
     try {
-      const res = await axios.post('${API}/login', { email, password });
+      const res = await axios.post(`${API}/login`, { email, password });
+
       localStorage.setItem('token', res.data.access_token);
-      const userRes = await axios.get('http://localhost:8000/me', {
+
+      const userRes = await axios.get(`${API}/me`, {
         headers: { Authorization: `Bearer ${res.data.access_token}` }
       });
+
       setUser(userRes.data);
       navigate('/dashboard');
+
       return { success: true };
     } catch (err) {
-      return { success: false, error: err.response?.data?.detail || 'Login failed' };
+      return {
+        success: false,
+        error: err.response?.data?.detail || 'Login failed'
+      };
     }
   };
 
+  // 🔹 Logout
   const logout = () => {
     localStorage.removeItem('token');
     setUser(null);
