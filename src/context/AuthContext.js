@@ -139,9 +139,11 @@ export const AuthProvider = ({ children }) => {
     }
   }, [user]);
 
+  const API = process.env.REACT_APP_API_URL
+
   const login = async (email, password) => {
     try {
-      const res = await axios.post('process.env.REACT_APP_API_URL/login', { email, password });
+      const res = await axios.post('${API}/login', { email, password });
       localStorage.setItem('token', res.data.access_token);
       const userRes = await axios.get('http://localhost:8000/me', {
         headers: { Authorization: `Bearer ${res.data.access_token}` }
