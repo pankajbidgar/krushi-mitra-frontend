@@ -17,12 +17,25 @@
 //   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 //   const [showNotifications, setShowNotifications] = useState(false);
 //   const [showProfileMenu, setShowProfileMenu] = useState(false);
-//   const [showKrushiMitraDropdown, setShowKrushiMitraDropdown] = useState(false);
+  
+//   // तीन नवीन ड्रॉपडाउनसाठी स्टेट्स
+//   const [showFarmingAdvice, setShowFarmingAdvice] = useState(false);
+//   const [showAiAssistants, setShowAiAssistants] = useState(false);
+//   const [showManagement, setShowManagement] = useState(false);
+//   const [showFarmerDropdown, setShowFarmerDropdown] = useState(false);
+//   const [showBuyerDropdown, setShowBuyerDropdown] = useState(false);
+  
 //   const [profileImageError, setProfileImageError] = useState(false);
+  
+//   // रेफरन्सेस
 //   const menuRef = useRef(null);
 //   const notifRef = useRef(null);
 //   const profileRef = useRef(null);
-//   const krushiMitraRef = useRef(null);
+//   const farmingAdviceRef = useRef(null);
+//   const aiAssistantsRef = useRef(null);
+//   const managementRef = useRef(null);
+//   const farmerDropdownRef = useRef(null);
+//   const buyerDropdownRef = useRef(null);
 
 //   // Click outside handler for all dropdowns
 //   useEffect(() => {
@@ -30,7 +43,11 @@
 //       if (menuRef.current && !menuRef.current.contains(event.target)) setMobileMenuOpen(false);
 //       if (notifRef.current && !notifRef.current.contains(event.target)) setShowNotifications(false);
 //       if (profileRef.current && !profileRef.current.contains(event.target)) setShowProfileMenu(false);
-//       if (krushiMitraRef.current && !krushiMitraRef.current.contains(event.target)) setShowKrushiMitraDropdown(false);
+//       if (farmingAdviceRef.current && !farmingAdviceRef.current.contains(event.target)) setShowFarmingAdvice(false);
+//       if (aiAssistantsRef.current && !aiAssistantsRef.current.contains(event.target)) setShowAiAssistants(false);
+//       if (managementRef.current && !managementRef.current.contains(event.target)) setShowManagement(false);
+//       if (farmerDropdownRef.current && !farmerDropdownRef.current.contains(event.target)) setShowFarmerDropdown(false);
+//       if (buyerDropdownRef.current && !buyerDropdownRef.current.contains(event.target)) setShowBuyerDropdown(false);
 //     };
 //     document.addEventListener('mousedown', handleClickOutside);
 //     return () => document.removeEventListener('mousedown', handleClickOutside);
@@ -50,37 +67,54 @@
 
 //   if (!user) return null;
 
-//   // Common links (Dashboard)
+//   // Common links
 //   const commonLinks = [{ to: '/dashboard', label: '📊 डॅशबोर्ड' }];
 
-//   // Krushi Mitra features (for farmer and also for common? We'll show for all roles, but especially farmer)
-//   const krushiMitraLinks = [
+//   // 1. शेती सल्ला (Farming Advice)
+//   const farmingAdviceLinks = [
 //     { to: '/crop-recommendation', label: '🌾 पीक शिफारस' },
-//     { to: '/market-prices', label: '📊 मंडी भाव' },
 //     { to: '/weather-advice', label: '🌤️ हवामान सल्ला' },
-//     { to: '/chatbot', label: '🤖 शेती सहाय्यक' },
-//     { to: '/disease-detection', label: '🌿 रोग ओळख' },
+//     { to: '/soil-moisture', label: '💧 माती ओलावा' },
+//     { to: '/farmer/irrigation', label: '💧 सिंचन शेड्यूलर' },
+//     { to: '/farmer/yield-prediction', label: '🌾 उत्पादन अंदाज' },
 //   ];
 
-//   // Farmer specific links
-//   const farmerSpecificLinks = [
+//   // 2. AI सहाय्यक (AI Assistants)
+//   const aiAssistantsLinks = [
+//     { to: '/chatbot', label: '🤖 शेती सहाय्यक (चॅट)' },
+//     { to: '/disease-detection', label: '🌿 रोग ओळख' },
+//     { to: '/video-call', label: '🎥 व्हिडिओ कॉल' },
+//     { to: '/voice-assistant', label: '🎤 व्हॉईस असिस्टंट' },
+//     { to: '/market-prices', label: '📊 मंडी भाव' },
+//     { to: '/scheme-finder', label: '📢 सरकारी योजना' },
+//   ];
+
+//   // 3. व्यवस्थापन (Management)
+//   const managementLinks = [
+//     { to: '/farmer/tasks', label: '📋 फार्म जर्नल' },
+//     { to: '/farmer/farm-management', label: '🌾 शेत व्यवस्थापन' },
+//     { to: '/farmer/profit-report', label: '📊 नफा/तोटा अहवाल' },
+//   ];
+
+//   // Farmer marketplace links
+//   const farmerMarketLinks = [
 //     { to: '/farmer/add-products', label: '🌾 उत्पादन जोडा' },
 //     { to: '/farmer/my-products', label: '📦 माझी उत्पादने' },
 //     { to: '/farmer/orders', label: '📋 माझ्या ऑर्डर' },
+//     { to: '/farmer/profit-report', label: '📊 नफा/तोटा अहवाल' },
+//     { to: '/farmer/create-auction', label: '🔨 लिलाव तयार करा' },
+//     { to: '/farmer/my-auctions', label: '📋 माझे लिलाव' },
 //   ];
 
-//   const buyerLinks = [
+//   // Buyer marketplace links
+//   const buyerMarketLinks = [
 //     { to: '/buyer/products', label: '🛒 उत्पादने बघा' },
 //     { to: '/buyer/orders', label: '📋 माझे ऑर्डर' },
 //     { to: '/buyer/cart', label: '🛍️ कार्ट' },
+//     { to: '/auctions', label: '🔨 सक्रिय लिलाव' },
 //   ];
 
-//   const adminLinks = [{ to: '/admin/dashboard', label: '🔧 Admin पॅनल' }];
-
-//   let roleSpecificLinks = [];
-//   if (user.role === 'farmer') roleSpecificLinks = farmerSpecificLinks;
-//   else if (user.role === 'buyer') roleSpecificLinks = buyerLinks;
-//   else if (user.role === 'admin') roleSpecificLinks = adminLinks;
+//   const adminLink = { to: '/admin/dashboard', label: '🔧 Admin पॅनल' };
 
 //   let roleText = '';
 //   if (user.role === 'farmer') roleText = 'शेतकरी';
@@ -104,23 +138,15 @@
 //             <Link key={link.to} to={link.to} className="nav-link">{link.label}</Link>
 //           ))}
 
-//           {/* Krushi Mitra Dropdown */}
-//           <div className="dropdown-wrapper" ref={krushiMitraRef}>
-//             <button
-//               className="dropdown-btn"
-//               onClick={() => setShowKrushiMitraDropdown(!showKrushiMitraDropdown)}
-//             >
-//               🌱 कृषि मित्र ▼
+//           {/* 1. शेती सल्ला ड्रॉपडाउन */}
+//           <div className="dropdown-wrapper" ref={farmingAdviceRef}>
+//             <button className="dropdown-btn" onClick={() => setShowFarmingAdvice(!showFarmingAdvice)}>
+//               🌱 शेती सल्ला ▼
 //             </button>
-//             {showKrushiMitraDropdown && (
+//             {showFarmingAdvice && (
 //               <div className="dropdown-content">
-//                 {krushiMitraLinks.map(link => (
-//                   <Link
-//                     key={link.to}
-//                     to={link.to}
-//                     className="dropdown-item"
-//                     onClick={() => setShowKrushiMitraDropdown(false)}
-//                   >
+//                 {farmingAdviceLinks.map(link => (
+//                   <Link key={link.to} to={link.to} className="dropdown-item" onClick={() => setShowFarmingAdvice(false)}>
 //                     {link.label}
 //                   </Link>
 //                 ))}
@@ -128,10 +154,76 @@
 //             )}
 //           </div>
 
-//           {/* Role specific links (Farmer/Buyer/Admin) */}
-//           {roleSpecificLinks.map(link => (
-//             <Link key={link.to} to={link.to} className="nav-link">{link.label}</Link>
-//           ))}
+//           {/* 2. AI सहाय्यक ड्रॉपडाउन */}
+//           <div className="dropdown-wrapper" ref={aiAssistantsRef}>
+//             <button className="dropdown-btn" onClick={() => setShowAiAssistants(!showAiAssistants)}>
+//               🤖 AI सहाय्यक ▼
+//             </button>
+//             {showAiAssistants && (
+//               <div className="dropdown-content">
+//                 {aiAssistantsLinks.map(link => (
+//                   <Link key={link.to} to={link.to} className="dropdown-item" onClick={() => setShowAiAssistants(false)}>
+//                     {link.label}
+//                   </Link>
+//                 ))}
+//               </div>
+//             )}
+//           </div>
+
+//           {/* 3. व्यवस्थापन ड्रॉपडाउन */}
+//           <div className="dropdown-wrapper" ref={managementRef}>
+//             <button className="dropdown-btn" onClick={() => setShowManagement(!showManagement)}>
+//               📊 व्यवस्थापन ▼
+//             </button>
+//             {showManagement && (
+//               <div className="dropdown-content">
+//                 {managementLinks.map(link => (
+//                   <Link key={link.to} to={link.to} className="dropdown-item" onClick={() => setShowManagement(false)}>
+//                     {link.label}
+//                   </Link>
+//                 ))}
+//               </div>
+//             )}
+//           </div>
+
+//           {/* Role-specific marketplace dropdowns */}
+//           {user.role === 'farmer' && (
+//             <div className="dropdown-wrapper" ref={farmerDropdownRef}>
+//               <button className="dropdown-btn" onClick={() => setShowFarmerDropdown(!showFarmerDropdown)}>
+//                 🌾 शेतकरी बाजार ▼
+//               </button>
+//               {showFarmerDropdown && (
+//                 <div className="dropdown-content">
+//                   {farmerMarketLinks.map(link => (
+//                     <Link key={link.to} to={link.to} className="dropdown-item" onClick={() => setShowFarmerDropdown(false)}>
+//                       {link.label}
+//                     </Link>
+//                   ))}
+//                 </div>
+//               )}
+//             </div>
+//           )}
+
+//           {user.role === 'buyer' && (
+//             <div className="dropdown-wrapper" ref={buyerDropdownRef}>
+//               <button className="dropdown-btn" onClick={() => setShowBuyerDropdown(!showBuyerDropdown)}>
+//                 🛒 खरेदीदार बाजार ▼
+//               </button>
+//               {showBuyerDropdown && (
+//                 <div className="dropdown-content">
+//                   {buyerMarketLinks.map(link => (
+//                     <Link key={link.to} to={link.to} className="dropdown-item" onClick={() => setShowBuyerDropdown(false)}>
+//                       {link.label}
+//                     </Link>
+//                   ))}
+//                 </div>
+//               )}
+//             </div>
+//           )}
+
+//           {user.role === 'admin' && (
+//             <Link to={adminLink.to} className="nav-link">{adminLink.label}</Link>
+//           )}
 
 //           {/* Chat Icon */}
 //           <Link to="/chat" className="chat-icon-wrapper">
@@ -149,27 +241,18 @@
 //               <div className="notifications-dropdown">
 //                 <div className="notifications-header">
 //                   <span>📢 सूचना</span>
-//                   {notifications.length > 0 && (
-//                     <button onClick={markAllAsRead} className="mark-read-btn">सर्व वाचा</button>
-//                   )}
+//                   {notifications.length > 0 && <button onClick={markAllAsRead} className="mark-read-btn">सर्व वाचा</button>}
 //                 </div>
 //                 <div className="notifications-list">
 //                   {notifications.length === 0 ? (
 //                     <div className="no-notifications">कोणतीही सूचना नाही</div>
 //                   ) : (
 //                     notifications.map(notif => (
-//                       <div
-//                         key={notif.id}
-//                         className={`notification-item ${notif.read ? 'read' : 'unread'}`}
-//                         onClick={() => handleNotificationClick(notif)}
-//                       >
+//                       <div key={notif.id} className={`notification-item ${notif.read ? 'read' : 'unread'}`} onClick={() => handleNotificationClick(notif)}>
 //                         <div className="notif-title">{notif.title}</div>
 //                         <div className="notif-message">{notif.message}</div>
 //                         <div className="notif-time">{new Date(notif.createdAt).toLocaleString()}</div>
-//                         <button
-//                           className="notif-close"
-//                           onClick={(e) => { e.stopPropagation(); removeNotification(notif.id); }}
-//                         >✖</button>
+//                         <button className="notif-close" onClick={(e) => { e.stopPropagation(); removeNotification(notif.id); }}>✖</button>
 //                       </div>
 //                     ))
 //                   )}
@@ -204,7 +287,7 @@
 //         </div>
 //       </div>
 
-//       {/* Mobile Menu */}
+//       {/* Mobile Menu – स्क्रोल करता येईल, तीन विभाग */}
 //       {mobileMenuOpen && (
 //         <div className="mobile-menu" ref={menuRef}>
 //           {commonLinks.map(link => (
@@ -212,22 +295,53 @@
 //               {link.label}
 //             </Link>
 //           ))}
-//           {/* Krushi Mitra section heading */}
-//           <div className="mobile-section-title">🌱 कृषि मित्र</div>
-//           {krushiMitraLinks.map(link => (
+          
+//           <div className="mobile-section-title">🌱 शेती सल्ला</div>
+//           {farmingAdviceLinks.map(link => (
 //             <Link key={link.to} to={link.to} className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
 //               {link.label}
 //             </Link>
 //           ))}
-//           {/* Role specific links */}
-//           <div className="mobile-section-title">
-//             {user.role === 'farmer' ? '👨‍🌾 शेतकरी सेवा' : user.role === 'buyer' ? '🛒 खरेदीदार सेवा' : '🔧 प्रशासन'}
-//           </div>
-//           {roleSpecificLinks.map(link => (
+          
+//           <div className="mobile-section-title">🤖 AI सहाय्यक</div>
+//           {aiAssistantsLinks.map(link => (
 //             <Link key={link.to} to={link.to} className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
 //               {link.label}
 //             </Link>
 //           ))}
+          
+//           <div className="mobile-section-title">📊 व्यवस्थापन</div>
+//           {managementLinks.map(link => (
+//             <Link key={link.to} to={link.to} className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
+//               {link.label}
+//             </Link>
+//           ))}
+
+//           {user.role === 'farmer' && (
+//             <>
+//               <div className="mobile-section-title">🌾 शेतकरी बाजार</div>
+//               {farmerMarketLinks.map(link => (
+//                 <Link key={link.to} to={link.to} className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
+//                   {link.label}
+//                 </Link>
+//               ))}
+//             </>
+//           )}
+//           {user.role === 'buyer' && (
+//             <>
+//               <div className="mobile-section-title">🛒 खरेदीदार बाजार</div>
+//               {buyerMarketLinks.map(link => (
+//                 <Link key={link.to} to={link.to} className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
+//                   {link.label}
+//                 </Link>
+//               ))}
+//             </>
+//           )}
+//           {user.role === 'admin' && (
+//             <Link to={adminLink.to} className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
+//               {adminLink.label}
+//             </Link>
+//           )}
 //           <Link to="/chat" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>💬 संदेश</Link>
 //           <Link to="/profile" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>👤 माझे प्रोफाइल</Link>
 //           <div className="mobile-user-info">
@@ -261,14 +375,19 @@ function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
-  const [showKrushiMitraDropdown, setShowKrushiMitraDropdown] = useState(false);
+  const [showFarmingAdvice, setShowFarmingAdvice] = useState(false);
+  const [showAiAssistants, setShowAiAssistants] = useState(false);
+  const [showManagement, setShowManagement] = useState(false);
   const [showFarmerDropdown, setShowFarmerDropdown] = useState(false);
   const [showBuyerDropdown, setShowBuyerDropdown] = useState(false);
   const [profileImageError, setProfileImageError] = useState(false);
+  
   const menuRef = useRef(null);
   const notifRef = useRef(null);
   const profileRef = useRef(null);
-  const krushiMitraRef = useRef(null);
+  const farmingAdviceRef = useRef(null);
+  const aiAssistantsRef = useRef(null);
+  const managementRef = useRef(null);
   const farmerDropdownRef = useRef(null);
   const buyerDropdownRef = useRef(null);
 
@@ -278,7 +397,9 @@ function Navbar() {
       if (menuRef.current && !menuRef.current.contains(event.target)) setMobileMenuOpen(false);
       if (notifRef.current && !notifRef.current.contains(event.target)) setShowNotifications(false);
       if (profileRef.current && !profileRef.current.contains(event.target)) setShowProfileMenu(false);
-      if (krushiMitraRef.current && !krushiMitraRef.current.contains(event.target)) setShowKrushiMitraDropdown(false);
+      if (farmingAdviceRef.current && !farmingAdviceRef.current.contains(event.target)) setShowFarmingAdvice(false);
+      if (aiAssistantsRef.current && !aiAssistantsRef.current.contains(event.target)) setShowAiAssistants(false);
+      if (managementRef.current && !managementRef.current.contains(event.target)) setShowManagement(false);
       if (farmerDropdownRef.current && !farmerDropdownRef.current.contains(event.target)) setShowFarmerDropdown(false);
       if (buyerDropdownRef.current && !buyerDropdownRef.current.contains(event.target)) setShowBuyerDropdown(false);
     };
@@ -300,30 +421,43 @@ function Navbar() {
 
   if (!user) return null;
 
-  // Common links (Dashboard)
+  // Common links
   const commonLinks = [{ to: '/dashboard', label: '📊 डॅशबोर्ड' }];
 
-  // Krushi Mitra features (for all roles)
-  const krushiMitraLinks = [
-    { to: '/farmer/tasks', label: '📋 फार्म जर्नल' },
-    { to: '/soil-moisture', label: '💧 माती ओलावा मॉनिटर' },
-    { to: '/farmer/farm-management', label: '🌾 शेत व्यवस्थापन' },
+  // 1. शेती सल्ला (Farming Advice)
+  const farmingAdviceLinks = [
     { to: '/crop-recommendation', label: '🌾 पीक शिफारस' },
-    { to: '/market-prices', label: '📊 मंडी भाव' },
     { to: '/weather-advice', label: '🌤️ हवामान सल्ला' },
-    { to: '/chatbot', label: '🤖 शेती सहाय्यक' },
+    { to: '/soil-moisture', label: '💧 माती ओलावा' },
+    { to: '/farmer/irrigation', label: '💧 सिंचन शेड्यूलर' },
+    { to: '/farmer/yield-prediction', label: '🌾 उत्पादन अंदाज' },
+  ];
+
+  // 2. AI सहाय्यक (AI Assistants)
+  const aiAssistantsLinks = [
+    { to: '/chatbot', label: '🤖 शेती सहाय्यक (चॅट)' },
     { to: '/disease-detection', label: '🌿 रोग ओळख' },
+    { to: '/video-call', label: '🎥 व्हिडिओ कॉल' },
+    { to: '/voice-assistant', label: '🎤 व्हॉईस असिस्टंट' },
+    { to: '/market-prices', label: '📊 मंडी भाव' },
+    { to: '/scheme-finder', label: '📢 सरकारी योजना' },
+  ];
+
+  // 3. व्यवस्थापन (Management)
+  const managementLinks = [
+    { to: '/farmer/tasks', label: '📋 फार्म जर्नल' },
+    { to: '/farmer/farm-management', label: '🌾 शेत व्यवस्थापन' },
+    { to: '/farmer/profit-report', label: '📊 नफा/तोटा अहवाल' },
   ];
 
   // Farmer marketplace links
   const farmerMarketLinks = [
-
     { to: '/farmer/add-products', label: '🌾 उत्पादन जोडा' },
     { to: '/farmer/my-products', label: '📦 माझी उत्पादने' },
     { to: '/farmer/orders', label: '📋 माझ्या ऑर्डर' },
     { to: '/farmer/profit-report', label: '📊 नफा/तोटा अहवाल' },
-    { to: '/farmer/irrigation', label: '💧 सिंचन शेड्यूलर' },
-    { to: '/farmer/yield-prediction', label: '🌾 उत्पादन अंदाज' },
+    { to: '/farmer/create-auction', label: '🔨 लिलाव तयार करा' },
+    { to: '/farmer/my-auctions', label: '📋 माझे लिलाव' },
   ];
 
   // Buyer marketplace links
@@ -331,6 +465,7 @@ function Navbar() {
     { to: '/buyer/products', label: '🛒 उत्पादने बघा' },
     { to: '/buyer/orders', label: '📋 माझे ऑर्डर' },
     { to: '/buyer/cart', label: '🛍️ कार्ट' },
+    { to: '/auctions', label: '🔨 सक्रिय लिलाव' },
   ];
 
   const adminLink = { to: '/admin/dashboard', label: '🔧 Admin पॅनल' };
@@ -351,21 +486,21 @@ function Navbar() {
       <div className="navbar-container">
         <Link to="/dashboard" className="navbar-logo">🌾 कृषि मित्र</Link>
 
-        {/* Desktop Menu */}
+        {/* Desktop Menu - same as before */}
         <div className="nav-menu desktop">
           {commonLinks.map(link => (
             <Link key={link.to} to={link.to} className="nav-link">{link.label}</Link>
           ))}
 
-          {/* Krushi Mitra Dropdown */}
-          <div className="dropdown-wrapper" ref={krushiMitraRef}>
-            <button className="dropdown-btn" onClick={() => setShowKrushiMitraDropdown(!showKrushiMitraDropdown)}>
-              🌱 कृषि मित्र ▼
+          {/* Farming Advice Dropdown */}
+          <div className="dropdown-wrapper" ref={farmingAdviceRef}>
+            <button className="dropdown-btn" onClick={() => setShowFarmingAdvice(!showFarmingAdvice)}>
+              🌱 शेती सल्ला ▼
             </button>
-            {showKrushiMitraDropdown && (
+            {showFarmingAdvice && (
               <div className="dropdown-content">
-                {krushiMitraLinks.map(link => (
-                  <Link key={link.to} to={link.to} className="dropdown-item" onClick={() => setShowKrushiMitraDropdown(false)}>
+                {farmingAdviceLinks.map(link => (
+                  <Link key={link.to} to={link.to} className="dropdown-item" onClick={() => setShowFarmingAdvice(false)}>
                     {link.label}
                   </Link>
                 ))}
@@ -373,7 +508,39 @@ function Navbar() {
             )}
           </div>
 
-          {/* Role-specific marketplace dropdowns */}
+          {/* AI Assistants Dropdown */}
+          <div className="dropdown-wrapper" ref={aiAssistantsRef}>
+            <button className="dropdown-btn" onClick={() => setShowAiAssistants(!showAiAssistants)}>
+              🤖 AI सहाय्यक ▼
+            </button>
+            {showAiAssistants && (
+              <div className="dropdown-content">
+                {aiAssistantsLinks.map(link => (
+                  <Link key={link.to} to={link.to} className="dropdown-item" onClick={() => setShowAiAssistants(false)}>
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Management Dropdown */}
+          <div className="dropdown-wrapper" ref={managementRef}>
+            <button className="dropdown-btn" onClick={() => setShowManagement(!showManagement)}>
+              📊 व्यवस्थापन ▼
+            </button>
+            {showManagement && (
+              <div className="dropdown-content">
+                {managementLinks.map(link => (
+                  <Link key={link.to} to={link.to} className="dropdown-item" onClick={() => setShowManagement(false)}>
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Farmer/Buyer/Admin links */}
           {user.role === 'farmer' && (
             <div className="dropdown-wrapper" ref={farmerDropdownRef}>
               <button className="dropdown-btn" onClick={() => setShowFarmerDropdown(!showFarmerDropdown)}>
@@ -474,20 +641,74 @@ function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu – स्क्रोल, क्लोज बटण, नोटिफिकेशन आणि चॅट आयकॉन */}
       {mobileMenuOpen && (
         <div className="mobile-menu" ref={menuRef}>
+          {/* Mobile Menu Header with Close button, Chat & Notification Icons */}
+          <div className="mobile-menu-header">
+            <button className="mobile-close-btn" onClick={() => setMobileMenuOpen(false)}>✕</button>
+            <div className="mobile-header-icons">
+              <Link to="/chat" className="mobile-chat-icon" onClick={() => setMobileMenuOpen(false)}>
+                <FaWhatsapp /> {unreadChatCount > 0 && <span className="badge">{unreadChatCount}</span>}
+              </Link>
+              <div className="mobile-notification-icon" onClick={() => setShowNotifications(!showNotifications)}>
+                🔔 {unreadCount > 0 && <span className="badge">{unreadCount}</span>}
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Notifications Dropdown (inside menu) */}
+          {showNotifications && (
+            <div className="mobile-notifications">
+              <div className="notifications-header">
+                <span>📢 सूचना</span>
+                {notifications.length > 0 && <button onClick={markAllAsRead} className="mark-read-btn">सर्व वाचा</button>}
+              </div>
+              <div className="notifications-list">
+                {notifications.length === 0 ? (
+                  <div className="no-notifications">कोणतीही सूचना नाही</div>
+                ) : (
+                  notifications.map(notif => (
+                    <div key={notif.id} className={`notification-item ${notif.read ? 'read' : 'unread'}`} onClick={() => handleNotificationClick(notif)}>
+                      <div className="notif-title">{notif.title}</div>
+                      <div className="notif-message">{notif.message}</div>
+                      <div className="notif-time">{new Date(notif.createdAt).toLocaleString()}</div>
+                      <button className="notif-close" onClick={(e) => { e.stopPropagation(); removeNotification(notif.id); }}>✖</button>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Menu Links */}
           {commonLinks.map(link => (
             <Link key={link.to} to={link.to} className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
               {link.label}
             </Link>
           ))}
-          <div className="mobile-section-title">🌱 कृषि मित्र</div>
-          {krushiMitraLinks.map(link => (
+          
+          <div className="mobile-section-title">🌱 शेती सल्ला</div>
+          {farmingAdviceLinks.map(link => (
             <Link key={link.to} to={link.to} className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
               {link.label}
             </Link>
           ))}
+          
+          <div className="mobile-section-title">🤖 AI सहाय्यक</div>
+          {aiAssistantsLinks.map(link => (
+            <Link key={link.to} to={link.to} className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
+              {link.label}
+            </Link>
+          ))}
+          
+          <div className="mobile-section-title">📊 व्यवस्थापन</div>
+          {managementLinks.map(link => (
+            <Link key={link.to} to={link.to} className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
+              {link.label}
+            </Link>
+          ))}
+
           {user.role === 'farmer' && (
             <>
               <div className="mobile-section-title">🌾 शेतकरी बाजार</div>
@@ -513,7 +734,6 @@ function Navbar() {
               {adminLink.label}
             </Link>
           )}
-          <Link to="/chat" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>💬 संदेश</Link>
           <Link to="/profile" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>👤 माझे प्रोफाइल</Link>
           <div className="mobile-user-info">
             <span className="mobile-user-name">👋 {user.full_name}</span>

@@ -119,6 +119,12 @@ import TaskManager from './components/Farmer/TaskManager';
 import ProfitReport from './components/Farmer/ProfitReport';
 import IrrigationScheduler from './components/Farmer/IrrigationScheduler';
 import YieldPrediction from './components/Farmer/YieldPrediction';
+import AuctionList from './components/Farmer/AuctionList';
+import CreateAuction from './components/Farmer/CreateAuction'
+import MyAuctions from './components/Farmer/MyAuctions';
+import VideoCall from './components/VideoCall'
+import VoiceAssistant from './components/VoiceAssistant'
+import SchemeFinder from './components/SchemeFinder'
 
 
 
@@ -265,6 +271,24 @@ function AppContent() {
           <PrivateRoute allowedRoles={['farmer']}>
             <YieldPrediction/>
           </PrivateRoute>
+        }/>
+
+        <Route path='/auctions' element={
+          <PrivateRoute><AuctionList/></PrivateRoute>
+        } /> 
+
+        <Route path='/farmer/create-auction' element={
+          <PrivateRoute allowedRoles={['farmer']}><CreateAuction/></PrivateRoute>
+        }/>
+
+        <Route path='/farmer/my-auctions' element={
+          <PrivateRoute allowedRoles={['farmer']}><MyAuctions/></PrivateRoute>
+        }/>
+        <Route path="/video-call" element={<PrivateRoute><VideoCall /></PrivateRoute>} />
+        <Route path="/voice-assistant" element={<PrivateRoute><VoiceAssistant /></PrivateRoute>} />
+
+        <Route path="/scheme-finder" element={
+          <PrivateRoute><SchemeFinder/></PrivateRoute>
         }/>
 
         <Route path="/dashboard" element={

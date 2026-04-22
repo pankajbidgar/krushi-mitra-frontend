@@ -1,0 +1,59 @@
+.voice-assistant-container {
+  max-width: 600px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 32px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.voice-assistant-container h2 {
+  color: #2e7d32;
+  margin-bottom: 0.5rem;
+}
+
+.mic-btn {
+  background: #ff9800;
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 60px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 1rem 0;
+  transition: background 0.2s;
+}
+
+.mic-btn:hover {
+  background: #f57c00;
+}
+
+.mic-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.user-question {
+  background: #e8f5e9;
+  padding: 12px;
+  border-radius: 20px;
+  margin: 1rem 0;
+  text-align: left;
+}
+
+.loading {
+  color: #2e7d32;
+  font-weight: 500;
+  margin: 1rem 0;
+}
+
+.answer-box {
+  background: #f5f5f5;
+  padding: 12px;
+  border-radius: 20px;
+  margin-top: 1rem;
+  text-align: left;
+  border-left: 4px solid #2e7d32;
+}
