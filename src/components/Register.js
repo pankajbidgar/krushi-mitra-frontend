@@ -130,12 +130,12 @@ function Register() {
           location: form.location,
           email: form.email || null
         };
-        await axios.post('${API}/mobile/register', payload);
+        await axios.post(`${API}/mobile/register`, payload);
         toast.success('नोंदणी यशस्वी! आता लॉगिन करा.');
         navigate('/login');
       } else {
         // Normal email registration
-        await axios.post('${API}/register', {
+        await axios.post(`${API}/register`, {
           full_name: form.full_name,
           email: form.email,
           password: form.password,
