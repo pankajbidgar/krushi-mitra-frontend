@@ -191,7 +191,7 @@ function Profile() {
     const formData = new FormData();
     formData.append('file', profilePic);
     try {
-      const res = await axios.post(`${API}/profile-picture`,formData, {
+      const res = await axios.post(`${API}/upload-profile-picture`, formData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       return res.data.profile_picture;
