@@ -192,7 +192,7 @@ function VideoCall() {
                   <div className="default-avatar">👤</div>
                 )}
                 <span>{exp.full_name}</span>
-                <small>({exp.role === 'admin' ? 'प्रशासक' : 'तज्ञ'})</small>
+                <small>({exp.role === 'buyer' ? 'प्रशासक' : 'तज्ञ'})</small>
               </div>
             ))
           )}
