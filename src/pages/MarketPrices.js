@@ -3,6 +3,9 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import '../style/MarketPrices.css';
 
+
+const API = process.env.REACT_APP_API_URL;
+
 function MarketPrices() {
   const [allData, setAllData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -11,7 +14,7 @@ function MarketPrices() {
   const [searchMarket, setSearchMarket] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:8000/market-prices/dynamic')
+    axios.get(`${API}/market-prices/dynamic`)
       .then(res => {
         setAllData(res.data);
         setFilteredData(res.data);

@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import "../style/CropRecommendation.css"
+
+
+
+const API = process.env.REACT_APP_API_URL;
 function CropRecommendation() {
   const [soilType, setSoilType] = useState('');
   const [season, setSeason] = useState('');
@@ -17,7 +21,7 @@ function CropRecommendation() {
     }
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:8000/crop-recommendation', {
+      const res = await axios.post(`${API}/crop-recommendation`, {
         soil_type: soilType,
         season: season,
         water: water

@@ -3,6 +3,9 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import '../style/DiseaseDetection.css';
 
+
+const API = process.env.REACT_APP_API_URL;
+
 function DiseaseDetection() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [preview, setPreview] = useState(null);
@@ -28,7 +31,7 @@ function DiseaseDetection() {
     formData.append('file', selectedImage);
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:8000/disease-detection', formData, {
+      const res = await axios.post(`${API}/disease-detection`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       setResult(res.data.disease_info);

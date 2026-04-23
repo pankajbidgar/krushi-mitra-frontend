@@ -3,6 +3,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import '../style/WeatherAdvice.css';
 
+const API = process.env.REACT_APP_API_URL;
+
 function WeatherAdvice() {
   const [city, setCity] = useState('');
   const [loading, setLoading] = useState(false);
@@ -16,7 +18,7 @@ function WeatherAdvice() {
     }
     setLoading(true);
     try {
-      const res = await axios.get(`http://localhost:8000/weather-advice?city=${city}`);
+      const res = await axios.get(`${API}/weather-advice?city=${city}`);
       setWeather(res.data);
     } catch (err) {
       toast.error(err.response?.data?.detail || 'शहर सापडले नाही');
@@ -36,7 +38,7 @@ function WeatherAdvice() {
       async (position) => {
         const { latitude, longitude } = position.coords;
         try {
-          const res = await axios.get(`http://localhost:8000/weather-advice?lat=${latitude}&lon=${longitude}`);
+          const res = await axios.get(`${API}/weather-advice?lat=${latitude}&lon=${longitude}`);
           setWeather(res.data);
           toast.success('तुमच्या स्थानासाठी हवामान मिळाले');
         } catch (err) {

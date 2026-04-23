@@ -3,6 +3,9 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import '../style/Chatbot.css';
 
+
+const API = process.env.REACT_APP_API_URL;
+
 function Chatbot() {
   const [query, setQuery] = useState('');
   const [messages, setMessages] = useState([]);
@@ -25,7 +28,7 @@ function Chatbot() {
 
     try {
       // Backend AI endpoint – adjust if you use GET or POST with params
-      const res = await axios.post('http://localhost:8000/chatbot', { query: query });
+      const res = await axios.post(`${API}/chatbot`, { query: query });
       const botMsg = { text: res.data.answer, sender: 'bot', timestamp: new Date().toLocaleTimeString() };
       setMessages(prev => [...prev, botMsg]);
     } catch (err) {
