@@ -276,7 +276,7 @@ function Chat() {
             {sidebarUsers.map(u => (
               <div key={u.id} style={userItemStyle(selectedUser?.id === u.id)} onClick={() => setSelectedUser(u)}>
                 <div style={avatarStyle()}>
-                  {u.profile_picture ? <img src={`http://localhost:8000${u.profile_picture}`} alt={u.full_name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <span>👤</span>}
+                  {u.profile_picture ? <img src={`${API}${u.profile_picture}`} alt={u.full_name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <span>👤</span>}
                 </div>
                 <div style={{ flex: 1 }}>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
