@@ -3,6 +3,9 @@ import axios from 'axios';
 import socket from '../socket';
 import { useAuth } from './AuthContext';
 
+
+const API = process.env.REACT_APP_API_URL;  
+
 const ChatContext = createContext();
 
 export const useChat = () => useContext(ChatContext);
@@ -15,7 +18,7 @@ export const ChatProvider = ({ children }) => {
     if (!user) return;
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:8000/chat/unread-count', {
+      const res = await axios.get(`${API}/chat/unread-count`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setUnreadChatCount(res.data.unread_count);
