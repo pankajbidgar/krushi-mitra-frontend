@@ -347,6 +347,9 @@ import toast from "react-hot-toast";
 import "../../style/MyProducts.css";
 import StarRating from "../../context/StarRating";
 
+
+const API = process.env.REACT_APP_API_URL;
+
 function MyProducts() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -374,7 +377,7 @@ function MyProducts() {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/products/my", {
+      const res = await axios.get(`${API}/products/my`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const sortedProducts = res.data.sort((a, b) => {
@@ -397,7 +400,7 @@ function MyProducts() {
   const handleDelete = async (id) => {
     if (window.confirm("खात्री आहे की हे उत्पादन हटवायचे?")) {
       try {
-        await axios.delete(`http://localhost:8000/products/${id}`, {
+        await axios.delete(`${API}/products/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         toast.success("उत्पादन हटवले");
@@ -411,7 +414,7 @@ function MyProducts() {
   const handleToggleStatus = async (id) => {
     try {
       const res = await axios.patch(
-        `http://localhost:8000/products/${id}/toggle-status`,
+        `${API}/products/${id}/toggle-status`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -453,7 +456,7 @@ function MyProducts() {
     }
     setAiLoading(true);
     try {
-      const response = await axios.post("http://localhost:8000/dynamic-pricing", {
+      const response = await axios.post(`${API}/dynamic-pricing`, {
         category: editForm.category,
         base_price: parseFloat(editForm.price),
         season: "खरीप",
@@ -518,7 +521,7 @@ function MyProducts() {
       formData.append("files", file);
     });
     try {
-      const response = await axios.post("http://localhost:8000/upload-multiple/", formData, {
+      const response = await axios.post(`${API}/upload-multiple`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       return response.data.image_urls;
@@ -544,7 +547,7 @@ function MyProducts() {
     const updatedData = { ...editForm, image_urls: finalImageUrls };
     try {
       await axios.put(
-        `http://localhost:8000/products/${editingProduct.id}`,
+        `${API}/products/${editingProduct.id}`,
         updatedData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -577,7 +580,7 @@ function MyProducts() {
                   {p.image_urls.map((url, idx) => (
                     <img
                       key={idx}
-                      src={`http://localhost:8000${url}`}
+                      src={`${API}${url}`}
                       alt={p.name}
                       className="product-image"
                     />
@@ -734,7 +737,7 @@ function MyProducts() {
                     {editForm.image_urls.map((url, idx) => (
                       <div key={idx} className="image-preview-wrapper">
                         <img
-                          src={`http://localhost:8000${url}`}
+                          src={`${API}${url}`}
                           alt="product"
                           className="edit-preview-img"
                         />

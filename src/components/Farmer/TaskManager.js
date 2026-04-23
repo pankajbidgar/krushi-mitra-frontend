@@ -3,6 +3,9 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import '../../style/TaskManager.css';
 
+
+const API = process.env.REACT_APP_API_URL;
+
 function TaskManager() {
   const token = localStorage.getItem('token');
   const [tasks, setTasks] = useState([]);
@@ -21,8 +24,8 @@ function TaskManager() {
   const fetchTasks = async () => {
     try {
       const url = filter === 'all' 
-        ? 'http://localhost:8000/farm/tasks'
-        : `http://localhost:8000/farm/tasks?status=${filter}`;
+        ? `${API}/farm/tasks`
+        : `${API}/farm/tasks?status=${filter}`;
       const res = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -45,12 +48,12 @@ function TaskManager() {
     setSubmitting(true);
     try {
       if (editingTask) {
-        await axios.put(`http://localhost:8000/farm/tasks/${editingTask.id}`, form, {
+        await axios.put(`${API}/farm/tasks/${editingTask.id}`, form, {
           headers: { Authorization: `Bearer ${token}` }
         });
         toast.success('कार्य अद्यतनित केले');
       } else {
-        await axios.post('http://localhost:8000/farm/tasks', form, {
+        await axios.post(`${API}/farm/tasks`, form, {
           headers: { Authorization: `Bearer ${token}` }
         });
         toast.success('कार्य जोडले');
@@ -67,7 +70,7 @@ function TaskManager() {
   const handleStatusToggle = async (task) => {
     const newStatus = task.status === 'pending' ? 'completed' : 'pending';
     try {
-      await axios.put(`http://localhost:8000/farm/tasks/${task.id}`, { status: newStatus }, {
+      await axios.put(`${API}/farm/tasks/${task.id}`, { status: newStatus }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       toast.success(`कार्य ${newStatus === 'completed' ? 'पूर्ण' : 'प्रलंबित'} म्हणून चिन्हांकित केले`);
@@ -80,7 +83,7 @@ function TaskManager() {
   const deleteTask = async (id) => {
     if (window.confirm('हे कार्य हटवायचे?')) {
       try {
-        await axios.delete(`http://localhost:8000/farm/tasks/${id}`, {
+        await axios.delete(`${API}/farm/tasks/${id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         toast.success('कार्य हटवले');

@@ -17,9 +17,11 @@ function VideoCall() {
   const remoteVideoRef = useRef(null);
   const token = localStorage.getItem('token');
 
+  const API = process.env.REACT_APP_API_URL;
+
   // Fetch available experts
   useEffect(() => {
-    axios.get('http://localhost:8000/call/experts', {
+    axios.get(`${API}/call/experts`, {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then(res => setExperts(res.data))
@@ -185,7 +187,7 @@ function VideoCall() {
             experts.map(exp => (
               <div key={exp.id} className="expert-card" onClick={() => startCall(exp)}>
                 {exp.profile_picture ? (
-                  <img src={`http://localhost:8000${exp.profile_picture}`} alt={exp.full_name} />
+                  <img src={`${API}${exp.profile_picture}`} alt={exp.full_name} />
                 ) : (
                   <div className="default-avatar">👤</div>
                 )}

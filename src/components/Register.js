@@ -108,6 +108,7 @@ function Register() {
 
   const API = process.env.REACT_APP_API_URL;
   
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (form.password !== form.confirmPassword) {

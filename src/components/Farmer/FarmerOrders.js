@@ -154,6 +154,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import '../../style/FarmerOrders.css';
 
+const API = process.env.REACT_APP_API_URL;
+
 function FarmerOrders() {
   const navigate = useNavigate();   // हुक वापरा
   const [orders, setOrders] = useState([]);
@@ -163,7 +165,7 @@ function FarmerOrders() {
 
   const fetchOrders = async () => {
     try {
-      const res = await axios.get('http://localhost:8000/orders/farmer', {
+      const res = await axios.get(`${API}/orders/farmer`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const sortedOrders = res.data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
@@ -181,7 +183,7 @@ function FarmerOrders() {
 
   const updateStatus = async (orderId, newStatus) => {
     try {
-      await axios.patch(`http://localhost:8000/orders/${orderId}/status?status=${newStatus}`, {}, {
+      await axios.patch(`${API}/orders/${orderId}/status?status=${newStatus}`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       toast.success(`ऑर्डर ${newStatus} केली`);
@@ -195,7 +197,7 @@ function FarmerOrders() {
   // downloadInvoice फंक्शन जोडा
 const downloadInvoice = async (orderId) => {
   try {
-    const response = await axios.get(`http://localhost:8000/orders/${orderId}/invoice`, {
+    const response = await axios.get(`${API}/orders/${orderId}/invoice`, {
       responseType: 'blob',
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     });
@@ -218,7 +220,7 @@ const downloadInvoice = async (orderId) => {
   const updateDeliveryDate = async (orderId, date) => {
     if (!date) return;
     try {
-      await axios.patch(`http://localhost:8000/orders/${orderId}/delivery-date?delivery_date=${date}`, {}, {
+      await axios.patch(`${API}/orders/${orderId}/delivery-date?delivery_date=${date}`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       toast.success('डिलिव्हरी तारीख अपडेट केली');

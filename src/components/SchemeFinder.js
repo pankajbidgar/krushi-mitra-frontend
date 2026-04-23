@@ -3,6 +3,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import '../style/SchemeFinder.css';
 
+const API = process.env.REACT_APP_API_URL;
+
 function SchemeFinder() {
   const token = localStorage.getItem('token');
   const [form, setForm] = useState({
@@ -26,7 +28,7 @@ function SchemeFinder() {
     }
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:8000/schemes/recommend', {
+      const res = await axios.post(`${API}/schemes/recommend`, {
         crop_name: form.crop_name,
         land_area: parseFloat(form.land_area),
         district: form.district,

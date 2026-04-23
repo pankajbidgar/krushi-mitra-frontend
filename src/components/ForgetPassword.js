@@ -12,13 +12,16 @@ function ForgotPassword() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [step, setStep] = useState(1); // 1: email, 2: otp, 3: reset
 
+  
+  const API = process.env.REACT_APP_API_URL;
+
   const handleSendOtp = async () => {
     if (!email) {
       toast.error('कृपया ईमेल प्रविष्ट करा');
       return;
     }
     try {
-      await axios.post('http://localhost:8000/forgot-password/send-otp', { email });
+      await axios.post(`${API}/forgot-password/send-otp`, { email });
       toast.success('OTP तुमच्या ईमेलवर पाठवला गेला');
       setStep(2);
     } catch (err) {
@@ -32,7 +35,7 @@ function ForgotPassword() {
       return;
     }
     try {
-      await axios.post('http://localhost:8000/forgot-password/verify-otp', { email, otp });
+      await axios.post(`${API}/forgot-password/verify-otp`, { email, otp });
       toast.success('OTP सत्यापित');
       setStep(3);
     } catch (err) {
@@ -50,7 +53,7 @@ function ForgotPassword() {
       return;
     }
     try {
-      await axios.post('http://localhost:8000/forgot-password/reset', {
+      await axios.post(`${API}/forgot-password/reset`, {
         email,
         otp,
         new_password: newPassword

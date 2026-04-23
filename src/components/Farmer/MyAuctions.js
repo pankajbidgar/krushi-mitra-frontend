@@ -3,6 +3,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import '../../style/MyAuctions.css';
 
+
+const API = process.env.REACT_APP_API_URL;
 function MyAuctions() {
   const [auctions, setAuctions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,7 +13,7 @@ function MyAuctions() {
 
   const fetchAuctions = async () => {
     try {
-      const res = await axios.get('http://localhost:8000/auctions/my', {
+      const res = await axios.get(`${API}/auctions/my`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setAuctions(res.data);
@@ -35,7 +37,7 @@ function MyAuctions() {
       return;
     }
     try {
-      const res = await axios.get(`http://localhost:8000/auctions/${auctionId}/bids`, {
+      const res = await axios.get(`${API}/auctions/${auctionId}/bids`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSelectedAuctionBids(prev => ({ ...prev, [auctionId]: res.data }));
@@ -47,7 +49,7 @@ function MyAuctions() {
   const endAuction = async (auctionId) => {
     if (window.confirm('हा लिलाव संपवून सर्वाधिक बोलीवाल्याला विक्री करायची?')) {
       try {
-        await axios.post(`http://localhost:8000/auctions/${auctionId}/end`, {}, {
+        await axios.post(`${API}/auctions/${auctionId}/end`, {}, {
           headers: { Authorization: `Bearer ${token}` }
         });
         toast.success('लिलाव संपवला');
@@ -61,7 +63,7 @@ function MyAuctions() {
   const cancelAuction = async (auctionId) => {
     if (window.confirm('हा लिलाव रद्द करायचा? कोणतीही विक्री होणार नाही.')) {
       try {
-        await axios.post(`http://localhost:8000/auctions/${auctionId}/cancel`, {}, {
+        await axios.post(`${API}/auctions/${auctionId}/cancel`, {}, {
           headers: { Authorization: `Bearer ${token}` }
         });
         toast.success('लिलाव रद्द केला');

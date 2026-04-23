@@ -19,6 +19,8 @@ import {
 } from 'chart.js';
 import '../../style/FarmerDashboard.css';
 
+const API = process.env.REACT_APP_API_URL;
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -50,12 +52,12 @@ function FarmerDashboard() {
       if (!token) return;
       setLoading(true);
       try {
-        const productsRes = await axios.get('http://localhost:8000/products/my', {
+        const productsRes = await axios.get(`${API}/products/my`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const products = productsRes.data;
 
-        const ordersRes = await axios.get('http://localhost:8000/orders/farmer', {
+        const ordersRes = await axios.get(`${API}/orders/farmer`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const orders = ordersRes.data;

@@ -3,6 +3,9 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import '../../style/AuctionList.css';
 
+
+const API = process.env.REACT_APP_API_URL;
+
 function AuctionList() {
   const [auctions, setAuctions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -10,7 +13,7 @@ function AuctionList() {
 
   const fetchAuctions = async () => {
     try {
-      const res = await axios.get('http://localhost:8000/auctions/active', {
+      const res = await axios.get(`${API}/auctions/active`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setAuctions(res.data);
@@ -34,7 +37,7 @@ function AuctionList() {
       return;
     }
     try {
-      await axios.post(`http://localhost:8000/auctions/${auctionId}/bid`, {
+      await axios.post(`${API}/auctions/${auctionId}/bid`, {
         amount: parseFloat(amount)
       }, {
         headers: { Authorization: `Bearer ${token}` }

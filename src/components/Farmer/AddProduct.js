@@ -204,6 +204,9 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import "../../style/AddProduct.css";
 
+
+const API = process.env.REACT_APP_API_URL;
+
 function AddProduct() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
@@ -271,7 +274,7 @@ function AddProduct() {
     });
     setUploading(true);
     try {
-      const response = await axios.post("http://localhost:8000/upload-multiple/", formData, {
+      const response = await axios.post(`${API}/upload-multiple/`, formData, {
         headers: { "Content-Type": "multipart/form-data" }
       });
       return response.data.image_urls;
@@ -299,7 +302,7 @@ function AddProduct() {
     }
     setAiLoading(true);
     try {
-      const response = await axios.post("http://localhost:8000/dynamic-pricing", {
+      const response = await axios.post(`${API}/dynamic-pricing`, {
         category: form.category,
         base_price: parseFloat(form.price),
         season: "खरीप",
@@ -331,10 +334,10 @@ function AddProduct() {
     const productData = { ...form, image_urls: uploadedImageUrls };
     const token = localStorage.getItem("token");
     try {
-      await axios.post("http://localhost:8000/products", productData, {
+      await axios.post(`${API}/products`, productData, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      toast.success("उत्पादन यशस्वीरित्या जोडले!");
+      toast.success("उत्पदन यशस्वीरित्या जोडले!");
       navigate("/farmer/my-products");
     } catch (err) {
       toast.error(err.response?.data?.detail || "उत्पादन जोडताना त्रुटी");

@@ -11,8 +11,11 @@ function CreateAuction() {
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem('token');
 
+
+  const API = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
-    axios.get('http://localhost:8000/products/my', {
+    axios.get(`${API}/products/my`, {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then(res => setProducts(res.data))
@@ -27,7 +30,7 @@ function CreateAuction() {
     }
     setLoading(true);
     try {
-      await axios.post('http://localhost:8000/auctions', {
+      await axios.post(`${API}/auctions`, {
         product_id: selectedProduct,
         starting_bid: parseFloat(startingBid),
         end_time: new Date(endTime).toISOString()

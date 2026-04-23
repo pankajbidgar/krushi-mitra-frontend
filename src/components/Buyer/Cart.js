@@ -10,6 +10,7 @@ function Cart() {
   const [paymentMethod, setPaymentMethod] = useState('cod');
   const [advancePercent, setAdvancePercent] = useState(30);
   const navigate = useNavigate();
+  const API = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     loadCart();
@@ -66,7 +67,7 @@ function Cart() {
     };
 
     try {
-      const response = await axios.post('http://localhost:8000/orders', orderData, {
+      const response = await axios.post(`${API}/orders`, orderData, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -88,7 +89,7 @@ function Cart() {
           handler: async (paymentResponse) => {
             // Verify payment on backend
             try {
-              await axios.post('http://localhost:8000/verify-payment', {
+              await axios.post(`${API}/verify-payment`, {
                 order_id: response.data.id,
                 razorpay_payment_id: paymentResponse.razorpay_payment_id,
                 razorpay_order_id: paymentResponse.razorpay_order_id,
@@ -139,7 +140,7 @@ function Cart() {
         {cart.map(item => (
           <div key={item.id} className="cart-item">
             {item.image_urls && item.image_urls[0] && (
-              <img src={`http://localhost:8000${item.image_urls[0]}`} alt={item.name} className="cart-item-img" />
+              <img src={`${API}${item.image_urls[0]}`} alt={item.name} className="cart-item-img" />
             )}
             <div className="cart-item-info">
               <h4>{item.name}</h4>

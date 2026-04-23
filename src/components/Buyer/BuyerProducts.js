@@ -163,6 +163,7 @@ function BuyerProducts() {
   const [locationFilter, setLocationFilter] = useState('');
   const [categoryFilter, setCategoryFilter] = useState(''); // नवीन
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const API = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     fetchProducts();
@@ -170,7 +171,7 @@ function BuyerProducts() {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get('http://localhost:8000/products');
+      const res = await axios.get(`${API}/products`);
       const sortedProducts = res.data.sort((a, b) => {
         const dateA = a.created_at ? new Date(a.created_at) : new Date(0);
         const dateB = b.created_at ? new Date(b.created_at) : new Date(0);
@@ -209,7 +210,7 @@ function BuyerProducts() {
 
   // QR कोड उघडण्यासाठी
   const showQRCode = (productId) => {
-    window.open(`http://localhost:8000/product/qrcode/${productId}`, '_blank');
+    window.open(`${API}/product/qrcode/${productId}`, '_blank');
   };
 
   if (loading) return <div className="loading">लोड करत आहे...</div>;
@@ -235,7 +236,7 @@ function BuyerProducts() {
           {filteredProducts.map(p => (
             <div key={p.id} className="product-card">
               {p.image_urls && p.image_urls.length > 0 && (
-                <img src={`http://localhost:8000${p.image_urls[0]}`} alt={p.name} className="product-img" />
+                <img src={`${API}${p.image_urls[0]}`} alt={p.name} className="product-img" />
               )}
               <h3>{p.name}</h3>
               <p className="price">₹{p.price} / {p.unit}</p>
@@ -274,7 +275,7 @@ function BuyerProducts() {
             {selectedProduct.image_urls && selectedProduct.image_urls.length > 0 && (
               <div className="modal-images">
                 {selectedProduct.image_urls.map((url, idx) => (
-                  <img key={idx} src={`http://localhost:8000${url}`} alt={`${selectedProduct.name} ${idx+1}`} className="modal-img" />
+                  <img key={idx} src={`${API}${url}`} alt={`${selectedProduct.name} ${idx+1}`} className="modal-img" />
                 ))}
               </div>
             )}

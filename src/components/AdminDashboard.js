@@ -268,6 +268,9 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 import '../style/AdminDashboard.css';
 
+
+const API = process.env.REACT_APP_API_URL;
+
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function AdminDashboard() {
@@ -280,7 +283,7 @@ function AdminDashboard() {
 
   const fetchStats = useCallback(async () => {
     try {
-      const res = await axios.get('http://localhost:8000/admin/stats', {
+      const res = await axios.get(`${API}/admin/stats`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setStats(res.data);
@@ -291,7 +294,7 @@ function AdminDashboard() {
 
   const fetchUsers = useCallback(async () => {
     try {
-      const res = await axios.get('http://localhost:8000/admin/users', {
+      const res = await axios.get(`${API}/admin/users`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setUsers(res.data);
@@ -302,7 +305,7 @@ function AdminDashboard() {
 
   const fetchProducts = useCallback(async () => {
     try {
-      const res = await axios.get('http://localhost:8000/admin/products', {
+      const res = await axios.get(`${API}/admin/products`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setProducts(res.data);
@@ -313,7 +316,7 @@ function AdminDashboard() {
 
   const fetchOrders = useCallback(async () => {
     try {
-      const res = await axios.get('http://localhost:8000/admin/orders', {
+      const res = await axios.get(`${API}/admin/orders`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setOrders(res.data);
@@ -332,7 +335,7 @@ function AdminDashboard() {
   const deleteUser = async (id) => {
     if (window.confirm('Delete this user?')) {
       try {
-        await axios.delete(`http://localhost:8000/admin/users/${id}`, {
+        await axios.delete(`${API}/admin/users/${id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         toast.success('User deleted');
@@ -347,7 +350,7 @@ function AdminDashboard() {
   const deleteProduct = async (id) => {
     if (window.confirm('Delete this product?')) {
       try {
-        await axios.delete(`http://localhost:8000/admin/products/${id}`, {
+        await axios.delete(`${API}/admin/products/${id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         toast.success('Product deleted');
@@ -361,7 +364,7 @@ function AdminDashboard() {
 
   const updateOrderStatus = async (id, newStatus) => {
     try {
-      await axios.patch(`http://localhost:8000/admin/orders/${id}/status?status=${newStatus}`, {}, {
+      await axios.patch(`${API}/admin/orders/${id}/status?status=${newStatus}`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       toast.success('Order status updated');
@@ -374,7 +377,7 @@ function AdminDashboard() {
 
   const updateUserRole = async (id, newRole) => {
     try {
-      await axios.patch(`http://localhost:8000/admin/users/${id}/role?new_role=${newRole}`, {}, {
+      await axios.patch(`${API}/admin/users/${id}/role?new_role=${newRole}`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       toast.success('User role updated');

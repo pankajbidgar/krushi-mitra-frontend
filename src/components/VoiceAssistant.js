@@ -10,6 +10,8 @@ function VoiceAssistant() {
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem('token');
 
+  const API = process.env.REACT_APP_API_URL;
+
   // ब्राउझर सपोर्ट तपासा
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   const recognition = SpeechRecognition ? new SpeechRecognition() : null;
@@ -34,7 +36,7 @@ function VoiceAssistant() {
       setIsListening(false);
       setLoading(true);
       try {
-        const res = await axios.post('http://localhost:8000/chatbot', { query: transcript }, {
+        const res = await axios.post(`${API}/chatbot`, { query: transcript }, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setAnswer(res.data.answer);

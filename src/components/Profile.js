@@ -138,6 +138,9 @@ import toast from 'react-hot-toast';
 import { useAuth } from '../context/AuthContext';
 import '../style/Profile.css';
 
+
+const API = process.env.REACT_APP_API_URL;
+
 function Profile() {
   const { user, setUser } = useAuth();
   const [form, setForm] = useState({
@@ -163,7 +166,7 @@ function Profile() {
         location: user.location || '',
       });
       if (user.profile_picture) {
-        const fullUrl = `http://localhost:8000${user.profile_picture}`;
+        const fullUrl = `${API}${user.profile_picture}`;
         setPreview(fullUrl);
       } else {
         setPreview(null);
@@ -188,7 +191,7 @@ function Profile() {
     const formData = new FormData();
     formData.append('file', profilePic);
     try {
-      const res = await axios.post('http://localhost:8000/upload-profile-picture', formData, {
+      const res = await axios.post(`${API}/profile-picture`,formData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       return res.data.profile_picture;
@@ -214,7 +217,7 @@ function Profile() {
     
     const updatedData = { ...form, profile_picture: profilePictureUrl };
     try {
-      const res = await axios.put('http://localhost:8000/profile', updatedData, {
+      const res = await axios.put(`${API}/profile`, updatedData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       toast.success('प्रोफाइल यशस्वीरित्या अपडेट केले');
@@ -237,7 +240,7 @@ function Profile() {
     }
     setChangingPassword(true);
     try {
-      await axios.post('http://localhost:8000/change-password', {
+      await axios.post(`${API}/change-password`, {
         current_password: currentPassword,
         new_password: newPassword
       }, {

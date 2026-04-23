@@ -4,6 +4,9 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import '../../style/SoilMoisture.css';
 
+
+const API = process.env.REACT_APP_API_URL;
+
 function SoilMoisture() {
   const [location, setLocation] = useState('');
   const [locationType, setLocationType] = useState('city'); // 'city' or 'pincode'
@@ -19,7 +22,7 @@ function SoilMoisture() {
     }
     setLoading(true);
     try {
-      let url = 'http://localhost:8000/soil-moisture?';
+      let url = `${API}/soil-moisture?`;
       if (locationType === 'city') {
         url += `city=${encodeURIComponent(location)}`;
       } else {

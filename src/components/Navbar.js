@@ -367,6 +367,9 @@ import toast from 'react-hot-toast';
 import { FaWhatsapp } from 'react-icons/fa';
 import '../style/Navbar.css';
 
+
+const API = process.env.REACT_APP_API_URL;
+
 function Navbar() {
   const { user, logout } = useAuth();
   const { notifications, unreadCount, markAsRead, markAllAsRead, removeNotification } = useNotifications();
@@ -476,7 +479,7 @@ function Navbar() {
   else if (user.role === 'admin') roleText = 'प्रशासक';
 
   const profilePicUrl = user.profile_picture && !profileImageError
-    ? `http://localhost:8000${user.profile_picture}?t=${Date.now()}`
+    ? `${API}${user.profile_picture}?t=${Date.now()}`
     : null;
 
   const handleImageError = () => setProfileImageError(true);

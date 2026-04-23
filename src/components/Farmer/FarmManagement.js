@@ -377,6 +377,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import '../../style/FarmManagement.css';
+const API = process.env.REACT_APP_API_URL;
 
 function FarmManagement() {
   const token = localStorage.getItem('token');
@@ -412,11 +413,11 @@ function FarmManagement() {
   const fetchData = async () => {
     try {
       const [expRes, plRes] = await Promise.all([
-        axios.get('http://localhost:8000/farm/expenses', {
+        axios.get(`${API}/farm/expenses`, {
           headers: { Authorization: `Bearer ${token}` },
           params: { start_date: startDate, end_date: endDate }
         }),
-        axios.get('http://localhost:8000/farm/profit-loss', {
+        axios.get(`${API}/farm/profit-loss`, {
           headers: { Authorization: `Bearer ${token}` },
           params: { start_date: startDate, end_date: endDate }
         })
@@ -438,7 +439,7 @@ function FarmManagement() {
     const formData = new FormData();
     formData.append('files', receiptFile);
     try {
-      const res = await axios.post('http://localhost:8000/upload-multiple/', formData, {
+      const res = await axios.post(`${API}/upload-multiple/`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       return res.data.image_urls[0];
@@ -471,7 +472,7 @@ function FarmManagement() {
       payment_status: newExpense.payment_status
     };
     try {
-      await axios.post('http://localhost:8000/farm/expenses', expenseData, {
+      await axios.post(`${API}/farm/expenses`, expenseData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       toast.success('खर्च जोडला');
@@ -504,7 +505,7 @@ function FarmManagement() {
   const deleteExpense = async (id) => {
     if (window.confirm('हा खर्च हटवायचा?')) {
       try {
-        await axios.delete(`http://localhost:8000/farm/expenses/${id}`, {
+        await axios.delete(`${API}/farm/expenses/${id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         toast.success('खर्च हटवला');
@@ -639,7 +640,7 @@ function FarmManagement() {
                     </td>
                     <td>
                       {exp.receipt_url && (
-                        <a href={`http://localhost:8000${exp.receipt_url}`} target="_blank" rel="noopener noreferrer">📄 बिल</a>
+                        <a href={`${API}${exp.receipt_url}`} target="_blank" rel="noopener noreferrer">📄 बिल</a>
                       )}
                     </td>
                     <td><button className="delete-expense-btn" onClick={() => deleteExpense(exp.id)}>हटवा</button></td>

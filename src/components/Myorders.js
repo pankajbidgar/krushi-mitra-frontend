@@ -236,11 +236,15 @@ function MyOrders() {
   const [submitting, setSubmitting] = useState(false);
   const [reviewedProductIds, setReviewedProductIds] = useState(new Set());
 
+  const API = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) return;
+
     
-    axios.get('http://localhost:8000/orders/my', {
+    
+    axios.get(`${API}/orders/my`, {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then(res => {
@@ -257,7 +261,7 @@ function MyOrders() {
 
   const fetchUserReviews = async (token) => {
     try {
-      const res = await axios.get('http://localhost:8000/reviews/my', {
+      const res = await axios.get(`${API}/reviews/my`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (Array.isArray(res.data)) {
@@ -292,7 +296,7 @@ function MyOrders() {
     setSubmitting(true);
     const token = localStorage.getItem('token');
     try {
-      await axios.post('http://localhost:8000/reviews', {
+      await axios.post(`${API}/reviews`, {
         product_id: selectedProduct.product_id,
         rating: ratingValue,
         comment: reviewComment

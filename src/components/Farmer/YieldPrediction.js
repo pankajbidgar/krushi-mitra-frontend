@@ -3,6 +3,9 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import '../../style/YieldPrediction.css';
 
+const API = process.env.REACT_APP_API_URL;
+
+
 function YieldPrediction() {
   const token = localStorage.getItem('token');
   const [form, setForm] = useState({
@@ -30,7 +33,7 @@ function YieldPrediction() {
     }
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:8000/crop/yield-predict', form, {
+      const res = await axios.post(`${API}/crop/yield-predict`, form, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setResult(res.data);
@@ -44,7 +47,7 @@ function YieldPrediction() {
 
   const fetchHistory = async () => {
     try {
-      const res = await axios.get('http://localhost:8000/crop/yield-history', {
+      const res = await axios.get(`${API}/crop/yield-history`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setHistory(res.data);

@@ -13,11 +13,13 @@ function ProductReviews({ productId }) {
 
   const token = localStorage.getItem('token');
 
+  const API = process.env.REACT_APP_API_URL;
+
   // फेच सर्व रिव्ह्यू
   const fetchReviews = async () => {
     if (!productId) return;
     try {
-      const res = await axios.get(`http://localhost:8000/reviews/product/${productId}`);
+      const res = await axios.get(`${API}/reviews/product/${productId}`);
       setReviews(res.data);
     } catch (err) {
       console.error(err);
@@ -31,7 +33,7 @@ function ProductReviews({ productId }) {
       return;
     }
     try {
-      const res = await axios.get('http://localhost:8000/orders/my', {
+      const res = await axios.get(`${API}/orders/my`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const orders = res.data;
@@ -58,7 +60,7 @@ function ProductReviews({ productId }) {
     if (!productId) return;
     setSubmitting(true);
     try {
-      await axios.post('http://localhost:8000/reviews', {
+      await axios.post(`${API}/reviews`, {
         product_id: productId,
         rating: newRating,
         comment: newComment

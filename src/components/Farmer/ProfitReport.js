@@ -17,6 +17,9 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import '../../style/ProfitReport.css';
 
+
+
+const API = process.env.REACT_APP_API_URL;
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement);
 
 function ProfitReport() {
@@ -36,7 +39,7 @@ function ProfitReport() {
   useEffect(() => {
     const fetchFilters = async () => {
       try {
-        const res = await axios.get('http://localhost:8000/farm/expenses', {
+        const res = await axios.get(`${API}/farm/expenses`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const crops = [...new Set(res.data.map(e => e.crop_name).filter(c => c))];
@@ -53,7 +56,7 @@ function ProfitReport() {
 //   const fetchReport = async () => {
 //     setLoading(true);
 //     try {
-//       const res = await axios.post('http://localhost:8000/farm/profit-report', filters, {
+//       const res = await axios.post(`${API}/farm/profit-report`, filters, {
 //         headers: { Authorization: `Bearer ${token}` }
 //       });
 //       setReport(res.data);
@@ -77,7 +80,7 @@ const fetchReport = async () => {
       crop_name: filters.crop_name || null,
       land_name: filters.land_name || null,
     };
-    const res = await axios.post('http://localhost:8000/farm/profit-report', payload, {
+    const res = await axios.post(`${API}/farm/profit-report`, payload, {
       headers: { Authorization: `Bearer ${token}` }
     });
     setReport(res.data);

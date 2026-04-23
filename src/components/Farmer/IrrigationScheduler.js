@@ -3,6 +3,10 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import '../../style/IrrigationScheduler.css';
 
+
+
+const API = process.env.REACT_APP_API_URL;
+
 function IrrigationScheduler() {
   const token = localStorage.getItem('token');
   const [schedules, setSchedules] = useState([]);
@@ -22,7 +26,7 @@ function IrrigationScheduler() {
 
   const fetchSchedules = async () => {
     try {
-      const res = await axios.get('http://localhost:8000/farm/irrigation', {
+      const res = await axios.get(`${API}/farm/irrigation`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSchedules(res.data);
@@ -33,7 +37,7 @@ function IrrigationScheduler() {
 
   const fetchDueSchedules = async () => {
     try {
-      const res = await axios.get('http://localhost:8000/farm/irrigation/due', {
+      const res = await axios.get(`${API}/farm/irrigation/due`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setDueSchedules(res.data);
@@ -56,12 +60,12 @@ function IrrigationScheduler() {
     setLoading(true);
     try {
       if (editingId) {
-        await axios.put(`http://localhost:8000/farm/irrigation/${editingId}`, form, {
+        await axios.put(`${API}/farm/irrigation/${editingId}`, form, {
           headers: { Authorization: `Bearer ${token}` }
         });
         toast.success('शेड्यूल अद्यतनित केले');
       } else {
-        await axios.post('http://localhost:8000/farm/irrigation', form, {
+        await axios.post(`${API}/farm/irrigation`, form, {
           headers: { Authorization: `Bearer ${token}` }
         });
         toast.success('शेड्यूल जोडले');
@@ -107,7 +111,7 @@ function IrrigationScheduler() {
   const deleteSchedule = async (id) => {
     if (window.confirm('हा शेड्यूल हटवायचा?')) {
       try {
-        await axios.delete(`http://localhost:8000/farm/irrigation/${id}`, {
+        await axios.delete(`${API}/farm/irrigation/${id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         toast.success('शेड्यूल हटवले');
@@ -131,7 +135,7 @@ function IrrigationScheduler() {
       next_irrigation_date: nextDate.toISOString().split('T')[0]
     };
     try {
-      await axios.put(`http://localhost:8000/farm/irrigation/${id}`, updated, {
+      await axios.put(`${API}/farm/irrigation/${id}`, updated, {
         headers: { Authorization: `Bearer ${token}` }
       });
       toast.success('सिंचन पूर्ण म्हणून नोंदवले');

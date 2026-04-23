@@ -31,9 +31,12 @@ function Chat() {
   }, [selectedUser]);
 
   // ----- API Calls -----
+
+  const API = process.env.REACT_APP_API_URL;
+  
   const fetchUsers = async () => {
     try {
-      const res = await axios.get('http://localhost:8000/users/all', {
+      const res = await axios.get(`${API}/users/all`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setUsers(res.data);
@@ -42,7 +45,7 @@ function Chat() {
 
   const fetchConversations = async () => {
     try {
-      const res = await axios.get('http://localhost:8000/chat/conversations', {
+      const res = await axios.get(`${API}/chat/conversations`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const map = {};
@@ -60,7 +63,7 @@ function Chat() {
   const fetchMessages = async (userId) => {
     setLoadingMsgs(true);
     try {
-      const res = await axios.get(`http://localhost:8000/chat/messages/${userId}`, {
+      const res = await axios.get(`${API}/chat/messages/${userId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setMessages(res.data);
@@ -78,7 +81,7 @@ function Chat() {
     const msgToSend = newMessage;
     setNewMessage('');
     try {
-      const res = await axios.post('http://localhost:8000/chat/send', {
+      const res = await axios.post(`${API}/chat/send`, {
         receiver_id: selectedUser.id,
         message: msgToSend
       }, {
@@ -106,7 +109,7 @@ function Chat() {
   const deleteMessage = async (messageId) => {
     if (!window.confirm('हा मेसेज हटवायचा?')) return;
     try {
-      await axios.delete(`http://localhost:8000/chat/messages/${messageId}`, {
+      await axios.delete(`${API}/chat/messages/${messageId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setMessages(prev => prev.filter(msg => msg.id !== messageId));
@@ -118,7 +121,7 @@ function Chat() {
     if (!selectedUser) return;
     if (!window.confirm(`"${selectedUser.full_name}" सोबतची संपूर्ण चॅट हटवायची?`)) return;
     try {
-      await axios.delete(`http://localhost:8000/chat/clear/${selectedUser.id}`, {
+      await axios.delete(`${API}/chat/clear/${selectedUser.id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setMessages([]);
